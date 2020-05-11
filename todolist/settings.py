@@ -25,8 +25,7 @@ SECRET_KEY = '!vqmyq=6-z&d7nu*at&)j!-6urg(-7^)xto6yhapb8ye(=50ha'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -76,12 +75,11 @@ WSGI_APPLICATION = 'todolist.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'todolist',
-        'USER':'root',
-        'PASSWORD':'123456',
-        'HOST':'',
-        'PORT':''
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'HOST': 'to_do_db',
+        'PORT': 5432,
     }
 }
 

@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:11.7
+    container_name: to_do_db
+    volumes:
+      - db-data:/var/lib/postgresql/todolistdata
+    networks:
+      - internal
+    ports:
+      - "4444:5432"
+    environment: 
+      POSTGRES_HOST_AUTH_METHOD: trust
+    
+  web:
+    restart: always
+    build: .
+    container_name: to_do_web
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - "db"
+    networks:
+      - internal
+    command: >
+      /bin/bash -c "
+        sleep 5;
+      python manage.py runserver 0.0.0.0:8000;"
+
+volumes:
+  db-data:
+
+networks:
+  internal:
+    driver: bridge
